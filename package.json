@@ -1,6 +1,6 @@
 {
-  "name": "@innovera/proxy-client",
-  "version": "1.0.0",
+  "name": "phoenix-proxy-client",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "type": "module",
