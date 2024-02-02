@@ -6,6 +6,7 @@ import {
 } from "openai/resources/index";
 
 import dotenv from "dotenv";
+import { decode, encode } from "gpt-tokenizer";
 dotenv.config();
 
 export type ProxyResponse = {
@@ -96,6 +97,15 @@ export async function requestChatGpt(
         throw new Error("Maximum retries reached, request is not completed.");
     }
     return data as ProxyResponse;
+}
+
+export function shrinkText(text: string, maxLength: number): string {
+    const tokens = encode(text);
+    if (tokens.length <= maxLength) {
+        return text;
+    }
+    const newTokens = tokens.slice(0, maxLength);
+    return decode(newTokens);
 }
 
 export type ChatResponse = ChatCompletion;
