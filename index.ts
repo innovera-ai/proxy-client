@@ -52,6 +52,7 @@ export async function requestChatGpt(
     name: string,
     description: string,
     timeout_ms?: number,
+    skipCache: boolean = false
 ): Promise<ProxyResponse> {
     if (!timeout_ms) {
         console.warn("No timeout provided in proxy, using default timeout of 120000ms, please provide a timeout in milliseconds to avoid this warning.");
@@ -68,6 +69,9 @@ export async function requestChatGpt(
                 "description": description,
                 "innovera-timeout": timeout_ms ? timeout_ms.toString() : 120000,
             },
+            params: {
+                skipCache,
+            }
         },
     );
 
